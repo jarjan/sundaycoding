@@ -1,7 +1,7 @@
 const fs = require("fs");
 var path = require("path");
 
-fs.readFile(path.join(__dirname, "./2022-12-01.txt"), "utf8", (err, str) => {
+fs.readFile(path.join(__dirname, "./input/day01.txt"), "utf8", (err, str) => {
   if (err) {
     console.error(err);
     return;
