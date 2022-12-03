@@ -28,7 +28,7 @@ function part1(arr) {
 }
 
 console.log(
-  "test: ",
+  "test1: ",
   part1([[1000, 2000, 3000], [4000], [5000, 6000], [7000, 8000, 9000], [10000]])
 );
 
@@ -40,3 +40,8 @@ function part2(arr) {
   sumArr.sort(compareNumbers);
   return sum(sumArr.slice(-3));
 }
+
+console.log(
+  "test2: ",
+  part2([[1000, 2000, 3000], [4000], [5000, 6000], [7000, 8000, 9000], [10000]])
+);

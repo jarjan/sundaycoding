@@ -42,7 +42,7 @@ function part1(arr) {
 }
 
 console.log(
-  "part1: ",
+  "test1: ",
   part1([
     ["A", "Y"],
     ["B", "X"],
@@ -78,7 +78,7 @@ function part2(arr) {
 }
 
 console.log(
-  "part2: ",
+  "test2: ",
   part2([
     ["A", "Y"],
     ["B", "X"],
