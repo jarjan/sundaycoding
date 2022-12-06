@@ -87,7 +87,7 @@ function part2(crates, commands) {
     const count = Number(command.slice(5, command.indexOf(" from")));
     const from = Number(command[command.length - 6]);
     const to = Number(command[command.length - 1]);
-    const tempStr = stacks[from - 1].slice(0, count).split("").join("");
+    const tempStr = stacks[from - 1].slice(0, count);
     stacks[from - 1] = stacks[from - 1].slice(count);
     stacks[to - 1] = tempStr + stacks[to - 1];
   });
