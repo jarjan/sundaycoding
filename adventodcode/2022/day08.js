@@ -8,7 +8,7 @@ fs.readFile(path.join(__dirname, "./input/day08.txt"), "utf8", (err, data) => {
   }
   const arr = data.split("\n");
   console.log("part1: ", part1(arr));
-  // console.log("part2: ", part2(arr));
+  console.log("part2: ", part2(arr));
 });
 
 function makeField(arr) {
@@ -90,7 +90,45 @@ function part2(arr) {
   const field = makeField(arr);
   const width = field[0].length;
   const height = field.length;
-  return field;
+
+  let max = Number.MIN_SAFE_INTEGER;
+
+  for (let i = 1; i < width - 1; i++) {
+    for (let j = 1; j < height - 1; j++) {
+      const elem = field[i][j];
+      let countLeft = 0;
+      for (let k = j - 1; k >= 0; k--) {
+        countLeft++;
+        if (field[i][k] >= elem) {
+          break;
+        }
+      }
+      let countRight = 0;
+      for (let k = j + 1; k < width; k++) {
+        countRight++;
+        if (field[i][k] >= elem) {
+          break;
+        }
+      }
+      let countTop = 0;
+      for (let k = i - 1; k >= 0; k--) {
+        countTop++;
+        if (field[k][j] >= elem) {
+          break;
+        }
+      }
+      let countBottom = 0;
+      for (let k = i + 1; k < height; k++) {
+        countBottom++;
+        if (field[k][j] >= elem) {
+          break;
+        }
+      }
+      const total = countLeft * countRight * countTop * countBottom;
+      max = total >= max ? total : max;
+    }
+  }
+  return max;
 }
 
 console.log("test2: ", part2(["30373", "25512", "65332", "33549", "35390"]));
