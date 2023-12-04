@@ -62,7 +62,44 @@ console.log(
 );
 
 function part2(arr) {
-  return arr;
+  const cards = Array.from({ length: arr.length }, (_, index) => ({
+    cardNumber: index + 1,
+    points: 0,
+    count: 1,
+  }));
+
+  arr.forEach((line, index) => {
+    const [_, cardNumbers] = line.split(": ");
+    const [left, right] = cardNumbers.split(" | ");
+    const wins = left
+      .split(" ")
+      .filter((n) => Boolean(n))
+      .map((n) => parseInt(n, 10));
+    const numbers = right
+      .split(" ")
+      .filter((n) => Boolean(n))
+      .map((n) => parseInt(n, 10));
+
+    numbers.forEach((n) => {
+      if (wins.includes(n)) {
+        cards[index].points += 1;
+      }
+    });
+
+    if (cards[index].points > 0) {
+      for (
+        let i = index + 1;
+        i <= index + cards[index].points && i < cards.length;
+        i++
+      ) {
+        cards[i].count += cards[index].count;
+      }
+    }
+  });
+
+  console.log(cards);
+
+  return cards.reduce((total, card) => total + card.count, 0);
 }
 
 console.log(
