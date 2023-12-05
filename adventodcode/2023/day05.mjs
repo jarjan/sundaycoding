@@ -7,8 +7,8 @@ const inputFile = path.join(__dirname, "./input/day05.txt");
 
 fs.readFile(inputFile, { encoding: "utf8" })
   .then((str) => {
-    // console.log(part1(str));
-    // console.log(part2(str));
+    // console.log("part1: ", part1(str));
+    // console.log("part2: ", part2(str));
   })
   .catch((err) => {
     console.error(err);
@@ -18,12 +18,15 @@ function mapping(inputArr, mapArr) {
   let outputArr = [];
   for (let i = 0; i < inputArr.length; i++) {
     let input = inputArr[i];
-    let map = mapArr.find((m) => m[0] <= input && input < m[0] + m[2]);
+    let map = mapArr.find((m) => m[0] <= input && input <= m[0] + m[2]);
     if (map) {
-      outputArr.push(Math.abs(map[1] - map[2]) + input);
-    } else {
-      outputArr.push(input);
+      console.log(input, map);
+      input = map[0] + (input - map[1]);
     }
+    if (input >= 100) input -= 100;
+    if (input < 0) input += 100;
+
+    outputArr.push(input);
   }
   return outputArr;
 }
@@ -75,8 +78,10 @@ function part1(str) {
 }
 
 console.log(
-  "part 1:",
-  part1(`seeds: 79 14 55 13
+  "test 1:",
+  // part1(`seeds: 79 14 55 13
+  part1(`seeds: 14
+
 
 seed-to-soil map:
 50 98 2
@@ -116,7 +121,7 @@ function part2(str) {
 }
 
 // console.log(
-//   "part 2:",
+//   "test 2:",
 //   part2(`seeds: 79 14 55 13
 
 //   seed-to-soil map:

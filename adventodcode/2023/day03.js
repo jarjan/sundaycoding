@@ -6,10 +6,10 @@ fs.readFile(path.join(__dirname, "./input/day03.txt"), "utf8", (err, str) => {
     console.error(err);
     return;
   }
-
   const arr = str.split("\n");
 
-  console.log(part1(arr));
+  console.log("part1: ", part1(arr));
+  console.log("part2: ", part2(arr));
 });
 
 function part1(arr) {
@@ -53,7 +53,7 @@ function part1(arr) {
 }
 
 console.log(
-  "part1: ",
+  "test1: ",
   part1([
     "467..114..",
     "...*......",
@@ -79,7 +79,7 @@ function part2(arr) {
 }
 
 console.log(
-  "part2: ",
+  "test2: ",
   part2([
     "467..114..",
     "...*......",

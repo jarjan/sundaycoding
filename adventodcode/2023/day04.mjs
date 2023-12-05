@@ -9,8 +9,8 @@ fs.readFile(inputFile, { encoding: "utf8" })
   .then((str) => {
     const arr = str.split("\n");
 
-    console.log(part1(arr));
-    console.log(part2(arr));
+    console.log("part1: ", part1(arr));
+    console.log("part2: ", part2(arr));
   })
   .catch((err) => {
     console.error(err);
@@ -50,7 +50,7 @@ function part1(arr) {
 }
 
 console.log(
-  "part 1:",
+  "test 1:",
   part1([
     "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53",
     "Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19",
@@ -97,13 +97,11 @@ function part2(arr) {
     }
   });
 
-  console.log(cards);
-
   return cards.reduce((total, card) => total + card.count, 0);
 }
 
 console.log(
-  "part 2:",
+  "test 2:",
   part2([
     "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53",
     "Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19",

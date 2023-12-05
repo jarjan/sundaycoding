@@ -1,5 +1,5 @@
 const fs = require("fs");
-var path = require("path");
+const path = require("path");
 
 fs.readFile(path.join(__dirname, "./input/day02.txt"), "utf8", (err, str) => {
   if (err) {
