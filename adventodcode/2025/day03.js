@@ -10,7 +10,7 @@ fs.readFile(inputFile, { encoding: "utf8" })
     const arr = str.split("\n");
 
     console.log("part1: ", part1(arr));
-    // console.log("part2: ", part2(arr));
+    console.log("part2: ", part2(arr));
   })
   .catch((err) => {
     console.error(err);
@@ -25,6 +25,7 @@ const test = [
 
 function part1(arr) {
   let sum = 0;
+
   arr.forEach((str) => {
     let max = 0;
     for (let i = 0; i < str.length - 1; i++) {
@@ -41,9 +42,24 @@ function part1(arr) {
 console.log("test1: ", part1(test));
 
 function part2(arr) {
-  let sum = 0;
+  let sum = BigInt(0);
 
-  return sum;
+  arr.forEach((str) => {
+    let num = str.length - 12;
+    const max = [];
+
+    for (const digit of str) {
+      while (max.length > 0 && digit > max[max.length - 1] && num > 0) {
+        max.pop();
+        num--;
+      }
+      max.push(digit);
+    }
+
+    sum += BigInt(max.slice(0, 12).join(""));
+  });
+
+  return sum.toString();
 }
 
-// console.log("test2: ", part2(test));
+console.log("test2: ", part2(test));
