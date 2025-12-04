@@ -3,7 +3,7 @@ import path from "path";
 import url from "url";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-const inputFile = path.join(__dirname, "./input/day01.txt");
+const inputFile = path.join(__dirname, "./input/input.txt");
 
 fs.readFile(inputFile, { encoding: "utf8" })
   .then((str) => {
