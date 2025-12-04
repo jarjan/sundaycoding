@@ -10,7 +10,7 @@ fs.readFile(inputFile, { encoding: "utf8" })
     const arr = str.split("\n");
 
     console.log("part1: ", part1(arr));
-    // console.log("part2: ", part2(arr));
+    console.log("part2: ", part2(arr));
   })
   .catch((err) => {
     console.error(err);
@@ -57,7 +57,42 @@ console.log("test1: ", part1(test));
 function part2(arr) {
   let sum = 0;
 
+  let nextArr = Array.from(arr);
+
+  let total = 0;
+
+  do {
+    total = 0;
+    const prevArr = Array.from(nextArr);
+
+    for (let i = 0; i < prevArr.length; i++) {
+      for (let j = 0; j < prevArr[i].length; j++) {
+        if (prevArr[i][j] === "@") {
+          let count = 0;
+          if (prevArr[i - 1]?.[j - 1] === "@") count++;
+          if (prevArr[i - 1]?.[j] === "@") count++;
+          if (prevArr[i - 1]?.[j + 1] === "@") count++;
+          if (prevArr[i]?.[j - 1] === "@") count++;
+          if (prevArr[i]?.[j + 1] === "@") count++;
+          if (prevArr[i + 1]?.[j - 1] === "@") count++;
+          if (prevArr[i + 1]?.[j] === "@") count++;
+          if (prevArr[i + 1]?.[j + 1] === "@") count++;
+
+          if (count < 4) {
+            nextArr[i] =
+              nextArr[i].substring(0, j) + "x" + nextArr[i].substring(j + 1);
+            total++;
+          }
+        }
+      }
+    }
+
+    nextArr = nextArr.map((str) => str.replaceAll("x", "."));
+
+    sum += total;
+  } while (total > 0);
+
   return sum;
 }
 
-// console.log("test2: ", part2(test));
+console.log("test2: ", part2(test));
