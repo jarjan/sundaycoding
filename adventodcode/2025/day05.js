@@ -65,29 +65,40 @@ function part2(arr) {
 
     return [range[lower], range[upper]];
   });
-  ranges.sort((a, b) => a[0] - b[0]);
 
-  const merged = [];
+  let mRanges = []; // merged ranges
+  let tRanges = Array.from(ranges); // temporary ranges
+  tRanges.sort((a, b) => a[0] - b[0]);
 
-  let skip = false;
-  for (let i = 0; i < ranges.length; i++) {
-    const curr = ranges[i];
-    const next = ranges[i + 1];
+  while (true) {
+    mRanges = [];
+    let skip = false;
+    for (let i = 0; i < tRanges.length; i++) {
+      const curr = tRanges[i];
+      const next = tRanges[i + 1];
 
-    if (curr[upper] >= next?.[lower]) {
-      merged.push([curr[lower], Math.max(curr[upper], next[upper])]);
-      skip = true;
-    } else {
-      if (!skip) {
-        merged.push(curr);
+      if (curr[upper] >= next?.[lower]) {
+        mRanges.push([curr[lower], Math.max(curr[upper], next[upper])]);
+        skip = true;
+      } else {
+        if (!skip) {
+          mRanges.push(curr);
+        }
+
+        skip = false;
       }
-
-      skip = false;
     }
+
+    if (tRanges.length === mRanges.length) {
+      break;
+    }
+
+    tRanges = Array.from(mRanges);
+    tRanges.sort((a, b) => a[0] - b[0]);
   }
 
-  for (let i = 0; i < merged.length; i++) {
-    sum += merged[i][1] - merged[i][0] + 1;
+  for (let i = 0; i < mRanges.length; i++) {
+    sum += mRanges[i][1] - mRanges[i][0] + 1;
   }
 
   return sum;
