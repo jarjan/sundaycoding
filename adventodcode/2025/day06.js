@@ -10,16 +10,16 @@ fs.readFile(inputFile, { encoding: "utf8" })
     const arr = str.split("\n");
 
     console.log("part1: ", part1(arr));
-    // console.log("part2: ", part2(arr));
+    console.log("part2: ", part2(arr));
   })
   .catch((err) => {
     console.error(err);
   });
 
 const test = [
-  "123 328  51 64",
-  "45 64  387 23",
-  "6 98  215 314",
+  "123 328  51 64 ",
+  " 45 64  387 23 ",
+  "  6 98  215 314",
   "*   +   *   + ",
 ];
 
@@ -55,6 +55,39 @@ console.log("test1: ", part1(test));
 
 function part2(arr) {
   let sum = 0;
+
+  const ops = arr[arr.length - 1].split("").reduce((acc, curr, index) => {
+    if (["+", "*"].includes(curr)) {
+      acc.push({ op: curr, index });
+    }
+    return acc;
+  }, []);
+  const nums = arr.slice(0, arr.length - 1);
+
+  for (let o = 0; o < ops.length; o++) {
+    const lowerIndex = ops[o].index;
+    const upperIndex = ops?.[o + 1] ? ops[o + 1].index : nums[0].length + 1;
+    const op = ops[o].op;
+
+    let total = 1;
+    let num = "";
+
+    for (let i = lowerIndex; i < upperIndex - 1; i++) {
+      num = "";
+      for (let j = 0; j < nums.length; j++) {
+        if (nums[j][i] !== " ") num += nums[j][i];
+      }
+      if (op === "+") {
+        total += parseInt(num);
+      }
+      if (op === "*") {
+        total *= parseInt(num);
+      }
+    }
+    if (op === "+") total--;
+
+    sum += total;
+  }
 
   return sum;
 }
